@@ -16,9 +16,14 @@ class WorkingDays {
         return start.datesUntil(ARBITRARY_END)
                 .filter(not(this::isTheWeekend))
                 .filter(not(this::isChristmasDayOrBoxingDay))
+                .filter(not(this::isNewYearsDay))
                 .limit(daysAfter + 1)
                 .collect(toList())
                 .get(daysAfter);
+    }
+
+    private boolean isNewYearsDay(LocalDate date) {
+        return date.getMonth() == Month.JANUARY && date.getDayOfMonth() == 1;
     }
 
     private boolean isChristmasDayOrBoxingDay(LocalDate date) {
