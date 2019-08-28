@@ -32,6 +32,26 @@ public class WorkingDaysTest {
         assertThat(workingDays, is(LocalDate.of(2019, 4, 8)));
     }
 
+    @Test
+    public void shouldHandleWeekDaysOverEndOfFeb_NoLeapYear() {
+        LocalDate workingDays = workingDaysAfter(
+                LocalDate.of(2019, 2, 28),
+                1
+        );
+
+        assertThat(workingDays, is(LocalDate.of(2019, 3, 1)));
+    }
+
+    @Test
+    public void shouldHandleWeekDaysOverEndOfFeb_LeapYear() {
+        LocalDate workingDays = workingDaysAfter(
+                LocalDate.of(2012, 2, 28),
+                2
+        );
+
+        assertThat(workingDays, is(LocalDate.of(2012, 3, 1)));
+    }
+
     private LocalDate workingDaysAfter(LocalDate start, int daysAfter) {
         return start.datesUntil(LocalDate.of(2099, 1, 1))
                 .filter(this::isAWeekDay)
