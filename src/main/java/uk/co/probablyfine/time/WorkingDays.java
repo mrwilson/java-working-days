@@ -16,9 +16,16 @@ class WorkingDays {
                 .filter(not(this::isTheWeekend))
                 .filter(not(this::isChristmasDayOrBoxingDay))
                 .filter(not(this::isNewYearsDay))
+                .filter(not(this::isAugustBankHoliday))
                 .limit(daysAfter + 1)
                 .collect(toList())
                 .get(daysAfter);
+    }
+
+    private boolean isAugustBankHoliday(LocalDate date) {
+        return date.getMonth() == Month.AUGUST
+                && date.getDayOfWeek() == MONDAY
+                && date.getDayOfMonth() >= 25;
     }
 
     private boolean isNewYearsDay(LocalDate date) {
