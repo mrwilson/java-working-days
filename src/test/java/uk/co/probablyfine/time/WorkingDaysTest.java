@@ -11,15 +11,15 @@ public class WorkingDaysTest {
 
     @Test
     public void shouldHandleWeekDays() {
-        int workingDays = workingDaysBetween(
+        LocalDate workingDays = workingDaysAfter(
             LocalDate.of(2019, 4, 1),
-            LocalDate.of(2019, 4, 5)
+            4
         );
 
-        assertThat(workingDays, is(5));
+        assertThat(workingDays, is(LocalDate.of(2019, 4, 5)));
     }
 
-    private int workingDaysBetween(LocalDate start, LocalDate end) {
-        return 5;
+    private LocalDate workingDaysAfter(LocalDate start, int daysAfter) {
+        return LocalDate.of(2019, 4, 5);
     }
 }
