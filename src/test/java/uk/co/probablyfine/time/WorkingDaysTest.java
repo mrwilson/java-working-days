@@ -2,10 +2,11 @@ package uk.co.probablyfine.time;
 
 import org.junit.Test;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.stream.Collectors;
 
+import static java.time.DayOfWeek.SATURDAY;
+import static java.time.DayOfWeek.SUNDAY;
+import static java.util.stream.Collectors.toList;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -32,12 +33,15 @@ public class WorkingDaysTest {
     }
 
     private LocalDate workingDaysAfter(LocalDate start, int daysAfter) {
-
         return start.datesUntil(LocalDate.of(2099, 1, 1))
-                .filter(date -> !(date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY))
+                .filter(this::isAWeekDay)
                 .limit(daysAfter + 1)
-                .collect(Collectors.toList())
+                .collect(toList())
                 .get(daysAfter);
+    }
+
+    private boolean isAWeekDay(LocalDate date) {
+        return !(date.getDayOfWeek() == SATURDAY || date.getDayOfWeek() == SUNDAY);
     }
 
 
