@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.stream.Stream;
 
-class WorkingDays {
+public class WorkingDays {
 
     private static final LocalDate ARBITRARY_END = LocalDate.of(2099, 1, 1);
 
