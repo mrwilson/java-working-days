@@ -1,53 +1,40 @@
 package uk.co.probablyfine.time;
 
-import org.junit.Test;
-
-import java.time.LocalDate;
-
 import static java.time.DayOfWeek.SATURDAY;
 import static java.time.DayOfWeek.SUNDAY;
 import static java.util.stream.Collectors.toList;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+import java.time.LocalDate;
+import org.junit.Test;
+
 public class WorkingDaysTest {
 
     @Test
     public void shouldHandleWeekDays() {
-        LocalDate workingDays = workingDaysAfter(
-                date(2019, 4, 1),
-                4
-        );
+        LocalDate workingDays = workingDaysAfter(date(2019, 4, 1), 4);
 
         assertThat(workingDays, is(date(2019, 4, 5)));
     }
 
     @Test
     public void shouldHandleWeekDaysOverWeekend() {
-        LocalDate workingDays = workingDaysAfter(
-                date(2019, 4, 1),
-                5
-        );
+        LocalDate workingDays = workingDaysAfter(date(2019, 4, 1), 5);
 
         assertThat(workingDays, is(date(2019, 4, 8)));
     }
 
     @Test
     public void shouldHandleWeekDaysOverEndOfFeb_NoLeapYear() {
-        LocalDate workingDays = workingDaysAfter(
-                date(2019, 2, 28),
-                1
-        );
+        LocalDate workingDays = workingDaysAfter(date(2019, 2, 28), 1);
 
         assertThat(workingDays, is(date(2019, 3, 1)));
     }
 
     @Test
     public void shouldHandleWeekDaysOverEndOfFeb_LeapYear() {
-        LocalDate workingDays = workingDaysAfter(
-                date(2012, 2, 28),
-                2
-        );
+        LocalDate workingDays = workingDaysAfter(date(2012, 2, 28), 2);
 
         assertThat(workingDays, is(date(2012, 3, 1)));
     }
@@ -67,5 +54,4 @@ public class WorkingDaysTest {
     private LocalDate date(int year, int month, int day) {
         return LocalDate.of(year, month, day);
     }
-
 }
