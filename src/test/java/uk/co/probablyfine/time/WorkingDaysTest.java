@@ -11,34 +11,34 @@ import org.junit.Test;
 
 public class WorkingDaysTest {
 
-    private final WorkingDays wDays = new WorkingDays();
+    private final WorkingDays workingDays = new WorkingDays();
 
     @Test
     public void shouldHandleWeekDays() {
-        LocalDate workingDays = wDays.after(date(2019, 4, 1), 4);
+        LocalDate fourDaysAfter = workingDays.after(date(2019, 4, 1), 4);
 
-        assertThat(workingDays, is(date(2019, 4, 5)));
+        assertThat(fourDaysAfter, is(date(2019, 4, 5)));
     }
 
     @Test
     public void shouldHandleWeekDaysOverWeekend() {
-        LocalDate workingDays = wDays.after(date(2019, 4, 1), 5);
+        LocalDate fiveDaysAfter = workingDays.after(date(2019, 4, 1), 5);
 
-        assertThat(workingDays, is(date(2019, 4, 8)));
+        assertThat(fiveDaysAfter, is(date(2019, 4, 8)));
     }
 
     @Test
     public void shouldHandleWeekDaysOverEndOfFeb_NoLeapYear() {
-        LocalDate workingDays = wDays.after(date(2019, 2, 28), 1);
+        LocalDate theNextDay = workingDays.after(date(2019, 2, 28), 1);
 
-        assertThat(workingDays, is(date(2019, 3, 1)));
+        assertThat(theNextDay, is(date(2019, 3, 1)));
     }
 
     @Test
     public void shouldHandleWeekDaysOverEndOfFeb_LeapYear() {
-        LocalDate workingDays = wDays.after(date(2012, 2, 28), 2);
+        LocalDate twoDaysAfter = workingDays.after(date(2012, 2, 28), 2);
 
-        assertThat(workingDays, is(date(2012, 3, 1)));
+        assertThat(twoDaysAfter, is(date(2012, 3, 1)));
     }
 
     private static class WorkingDays {
