@@ -54,7 +54,7 @@ public class WorkingDaysTest {
 
         private LocalDate after(LocalDate start, int daysAfter) {
             return start.datesUntil(LocalDate.of(2099, 1, 1))
-                    .filter(this::isAWeekDay)
+                    .filter(not(this::isTheWeekend))
                     .filter(not(this::isChristmasDayOrBoxingDay))
                     .limit(daysAfter + 1)
                     .collect(toList())
@@ -67,8 +67,8 @@ public class WorkingDaysTest {
             return date.getMonth() == Month.DECEMBER && (day == 25 || day == 26);
         }
 
-        private boolean isAWeekDay(LocalDate date) {
-            return !(date.getDayOfWeek() == SATURDAY || date.getDayOfWeek() == SUNDAY);
+        private boolean isTheWeekend(LocalDate date) {
+            return date.getDayOfWeek() == SATURDAY || date.getDayOfWeek() == SUNDAY;
         }
     }
 
