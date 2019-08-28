@@ -1,6 +1,9 @@
 plugins {
     id 'java'
+    id 'com.diffplug.gradle.spotless' version '3.24.2'
 }
+
+apply plugin: 'com.diffplug.gradle.spotless'
 
 group 'uk.co.probablyfine'
 version '1.0-SNAPSHOT'
@@ -9,6 +12,12 @@ sourceCompatibility = 1.11
 
 repositories {
     mavenCentral()
+}
+
+spotless {
+    java {
+        googleJavaFormat('1.7').aosp()
+    }
 }
 
 dependencies {
