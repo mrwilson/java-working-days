@@ -81,6 +81,21 @@ public class WorkingDaysTest {
         assertThat(dayAfter2021, is(date(2021, 8, 31)));
     }
 
+    @Test
+    public void shouldHandleMovingBankHoliday_May() {
+        // May Bank Holiday is the 6th in 2019
+        LocalDate dayAfter2019 = workingDays.after(date(2019, 5, 3), 1);
+        assertThat(dayAfter2019, is(date(2019, 5, 7)));
+
+        // May Bank Holiday is the 1st in 2028
+        LocalDate dayAfter2020 = workingDays.after(date(2028, 4, 28), 1);
+        assertThat(dayAfter2020, is(date(2028, 5, 2)));
+
+        // May Bank Holiday is the 7th in 2029
+        LocalDate dayAfter2021 = workingDays.after(date(2029, 5, 4), 1);
+        assertThat(dayAfter2021, is(date(2029, 5, 8)));
+    }
+
     private LocalDate date(int year, int month, int day) {
         return LocalDate.of(year, month, day);
     }
