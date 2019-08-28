@@ -1,7 +1,6 @@
 package uk.co.probablyfine.time;
 
-import static java.time.DayOfWeek.SATURDAY;
-import static java.time.DayOfWeek.SUNDAY;
+import static java.time.DayOfWeek.*;
 import static java.util.function.Predicate.not;
 import static java.util.stream.Collectors.toList;
 
@@ -27,9 +26,42 @@ class WorkingDays {
     }
 
     private boolean isChristmasDayOrBoxingDay(LocalDate date) {
-        int day = date.getDayOfMonth();
+        return isChristmasDay(date) || isBoxingDay(date);
+    }
 
-        return date.getMonth() == Month.DECEMBER && (day == 25 || day == 26);
+    private boolean isChristmasDay(LocalDate date) {
+
+        boolean isNonWeekend =
+                date.getMonth() == Month.DECEMBER
+                        && date.getDayOfMonth() == 25
+                        && !isTheWeekend(date);
+        boolean isChristmasInLieu =
+                date.getMonth() == Month.DECEMBER
+                        && date.getDayOfMonth() == 26
+                        && date.getDayOfWeek() == MONDAY;
+        boolean isChristmasInLieu2 =
+                date.getMonth() == Month.DECEMBER
+                        && date.getDayOfMonth() == 27
+                        && date.getDayOfWeek() == MONDAY;
+
+        return isNonWeekend || isChristmasInLieu || isChristmasInLieu2;
+    }
+
+    private boolean isBoxingDay(LocalDate date) {
+        boolean isNonWeekend =
+                date.getMonth() == Month.DECEMBER
+                        && date.getDayOfMonth() == 26
+                        && !isTheWeekend(date);
+        boolean isBoxingDayInLieu =
+                date.getMonth() == Month.DECEMBER
+                        && date.getDayOfMonth() == 28
+                        && date.getDayOfWeek() == TUESDAY;
+        boolean isBoxingDayInLieu2 =
+                date.getMonth() == Month.DECEMBER
+                        && date.getDayOfMonth() == 27
+                        && date.getDayOfWeek() == TUESDAY;
+
+        return isNonWeekend || isBoxingDayInLieu || isBoxingDayInLieu2;
     }
 
     private boolean isTheWeekend(LocalDate date) {
