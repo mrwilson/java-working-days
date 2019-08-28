@@ -37,38 +37,27 @@ class WorkingDays {
     }
 
     private boolean isChristmasDay(LocalDate date) {
+        if (date.getMonth() != Month.DECEMBER) {
+            return false;
+        }
 
-        boolean isNonWeekend =
-                date.getMonth() == Month.DECEMBER
-                        && date.getDayOfMonth() == 25
-                        && !isTheWeekend(date);
-        boolean isChristmasInLieu =
-                date.getMonth() == Month.DECEMBER
-                        && date.getDayOfMonth() == 26
-                        && date.getDayOfWeek() == MONDAY;
-        boolean isChristmasInLieu2 =
-                date.getMonth() == Month.DECEMBER
-                        && date.getDayOfMonth() == 27
-                        && date.getDayOfWeek() == MONDAY;
+        boolean christmasDuringTheWeek = date.getDayOfMonth() == 25 && !isTheWeekend(date);
+        boolean christmasOnSunday = date.getDayOfMonth() == 26 && date.getDayOfWeek() == MONDAY;
+        boolean christmasOnSaturday = date.getDayOfMonth() == 27 && date.getDayOfWeek() == MONDAY;
 
-        return isNonWeekend || isChristmasInLieu || isChristmasInLieu2;
+        return christmasDuringTheWeek || christmasOnSunday || christmasOnSaturday;
     }
 
     private boolean isBoxingDay(LocalDate date) {
-        boolean isNonWeekend =
-                date.getMonth() == Month.DECEMBER
-                        && date.getDayOfMonth() == 26
-                        && !isTheWeekend(date);
-        boolean isBoxingDayInLieu =
-                date.getMonth() == Month.DECEMBER
-                        && date.getDayOfMonth() == 28
-                        && date.getDayOfWeek() == TUESDAY;
-        boolean isBoxingDayInLieu2 =
-                date.getMonth() == Month.DECEMBER
-                        && date.getDayOfMonth() == 27
-                        && date.getDayOfWeek() == TUESDAY;
+        if (date.getMonth() != Month.DECEMBER) {
+            return false;
+        }
 
-        return isNonWeekend || isBoxingDayInLieu || isBoxingDayInLieu2;
+        boolean christmasDuringTheWeek = date.getDayOfMonth() == 26 && !isTheWeekend(date);
+        boolean christmasOnSunday = date.getDayOfMonth() == 27 && date.getDayOfWeek() == TUESDAY;
+        boolean christmasOnSaturday = date.getDayOfMonth() == 28 && date.getDayOfWeek() == TUESDAY;
+
+        return christmasDuringTheWeek || christmasOnSunday || christmasOnSaturday;
     }
 
     private boolean isTheWeekend(LocalDate date) {
