@@ -45,6 +45,13 @@ public class WorkingDaysTest {
         assertThat(dayAfter, is(date(2019, 12, 27)));
     }
 
+    @Test
+    public void shouldHandleNewYearsDay() {
+        LocalDate dayAfter = workingDays.after(date(2019, 12, 31), 1);
+
+        assertThat(dayAfter, is(date(2020, 1, 2)));
+    }
+
     private LocalDate date(int year, int month, int day) {
         return LocalDate.of(year, month, day);
     }
