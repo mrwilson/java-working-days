@@ -52,8 +52,10 @@ public class WorkingDaysTest {
 
     private static class WorkingDays {
 
+        private static final LocalDate ARBITRARY_END = LocalDate.of(2099, 1, 1);
+
         private LocalDate after(LocalDate start, int daysAfter) {
-            return start.datesUntil(LocalDate.of(2099, 1, 1))
+            return start.datesUntil(ARBITRARY_END)
                     .filter(not(this::isTheWeekend))
                     .filter(not(this::isChristmasDayOrBoxingDay))
                     .limit(daysAfter + 1)
