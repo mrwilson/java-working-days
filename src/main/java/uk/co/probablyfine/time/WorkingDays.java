@@ -229,7 +229,7 @@ public class WorkingDays {
     }
 
     boolean isPublicHoliday(LocalDate date) {
-        Stream<Predicate<LocalDate>> not =
+        Stream<Predicate<LocalDate>> publicHolidays =
                 Stream.of(
                         this::isChristmasDayOrBoxingDay,
                         this::isNewYearsDay,
@@ -240,6 +240,6 @@ public class WorkingDays {
                         this::isEasterMonday,
                         this::isSpecialBankHoliday);
 
-        return not.anyMatch(p -> p.test(date));
+        return publicHolidays.anyMatch(p -> p.test(date));
     }
 }
