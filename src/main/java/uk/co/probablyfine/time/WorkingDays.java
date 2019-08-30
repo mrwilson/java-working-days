@@ -161,7 +161,15 @@ public class WorkingDays {
     }
 
     private boolean isNewYearsDay(LocalDate date) {
-        return date.getMonth() == Month.JANUARY && date.getDayOfMonth() == 1;
+        if (date.getMonth() != Month.JANUARY) {
+            return false;
+        }
+
+        boolean duringTheWeek = date.getDayOfMonth() == 1 && !isTheWeekend(date);
+        boolean onSaturday = date.getDayOfWeek() == MONDAY && date.getDayOfMonth() == 3;
+        boolean onSunday = date.getDayOfWeek() == MONDAY && date.getDayOfMonth() == 2;
+
+        return duringTheWeek || onSaturday || onSunday;
     }
 
     private boolean isChristmasDayOrBoxingDay(LocalDate date) {

@@ -53,6 +53,20 @@ public class WorkingDaysTest {
     }
 
     @Test
+    public void shouldHandleNewYearsDayOnSaturday() {
+        LocalDate dayAfter = workingDays.after(date(2021, 12, 31), 1);
+
+        assertThat(dayAfter, is(date(2022, 1, 4)));
+    }
+
+    @Test
+    public void shouldHandleNewYearsDayOnSunday() {
+        LocalDate dayAfter = workingDays.after(date(2016, 12, 30), 1);
+
+        assertThat(dayAfter, is(date(2017, 1, 3)));
+    }
+
+    @Test
     public void shouldHandleWhenChristmasAndNewYearBothFallAtTheWeekend() {
         LocalDate dayAfter = workingDays.after(date(2021, 12, 24), 1);
 
