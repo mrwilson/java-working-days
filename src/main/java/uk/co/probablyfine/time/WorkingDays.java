@@ -228,7 +228,7 @@ public class WorkingDays {
         return date.getDayOfWeek() == SATURDAY || date.getDayOfWeek() == SUNDAY;
     }
 
-    boolean isPublicHoliday(LocalDate date) {
+    public boolean isPublicHoliday(LocalDate date) {
         Stream<Predicate<LocalDate>> publicHolidays =
                 Stream.of(
                         this::isChristmasDayOrBoxingDay,
