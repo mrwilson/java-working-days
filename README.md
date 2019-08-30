@@ -1,5 +1,7 @@
 # java-working-days
 
+[![Build Status](https://travis-ci.org/mrwilson/java-working-days.svg?branch=master)](https://travis-ci.org/mrwilson/java-working-days)
+
 > What date is N working days after date X?
 
 **Under Development - [Caveat Emptor](https://en.wikipedia.org/wiki/Caveat_emptor)**
