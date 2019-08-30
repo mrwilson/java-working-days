@@ -97,6 +97,13 @@ public class WorkingDaysTest {
     }
 
     @Test
+    public void shouldHandleMovingBankHoliday_EndOfMay() {
+        // End of May Bank Holiday is the 27th in 2019
+        LocalDate dayAfter2019 = workingDays.after(date(2019, 5, 24), 1);
+        assertThat(dayAfter2019, is(date(2019, 5, 28)));
+    }
+
+    @Test
     public void shouldHandleMovingBankHoliday_Easter() {
         // Easter Sunday is the 21st in 2019
         LocalDate dayAfter2019 = workingDays.after(date(2019, 4, 18), 1);
