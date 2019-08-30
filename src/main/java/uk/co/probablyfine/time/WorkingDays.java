@@ -19,11 +19,18 @@ public class WorkingDays {
                 .filter(not(this::isNewYearsDay))
                 .filter(not(this::isAugustBankHoliday))
                 .filter(not(this::isMayDayBankHoliday))
+                .filter(not(this::isEndOfMayBankHoliday))
                 .filter(not(this::isGoodFriday))
                 .filter(not(this::isEasterMonday))
                 .limit(daysAfter + 1)
                 .collect(toList())
                 .get(daysAfter);
+    }
+
+    private boolean isEndOfMayBankHoliday(LocalDate date) {
+        return date.getMonth() == Month.MAY
+                && date.getDayOfWeek() == MONDAY
+                && date.getDayOfMonth() >= 25;
     }
 
     private boolean isGoodFriday(LocalDate date) {
