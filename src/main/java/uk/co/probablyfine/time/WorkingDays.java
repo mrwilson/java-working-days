@@ -6,6 +6,7 @@ import static java.util.stream.Collectors.toList;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class WorkingDays {
@@ -15,22 +16,34 @@ public class WorkingDays {
     public LocalDate after(LocalDate start, int daysAfter) {
         return start.datesUntil(ARBITRARY_END)
                 .filter(not(this::isTheWeekend))
-                .filter(not(this::isChristmasDayOrBoxingDay))
-                .filter(not(this::isNewYearsDay))
-                .filter(not(this::isAugustBankHoliday))
-                .filter(not(this::isMayDayBankHoliday))
-                .filter(not(this::isEndOfMayBankHoliday))
-                .filter(not(this::isGoodFriday))
-                .filter(not(this::isEasterMonday))
+                .filter(not(this::isPublicHoliday))
                 .limit(daysAfter + 1)
                 .collect(toList())
                 .get(daysAfter);
     }
 
     private boolean isEndOfMayBankHoliday(LocalDate date) {
-        return date.getMonth() == Month.MAY
-                && date.getDayOfWeek() == MONDAY
-                && date.getDayOfMonth() >= 25;
+        boolean asNormal =
+                date.getYear() != 2012
+                        && date.getMonth() == Month.MAY
+                        && date.getDayOfWeek() == MONDAY
+                        && date.getDayOfMonth() >= 25;
+
+        boolean diamondJubilee =
+                date.getYear() == 2012
+                        && date.getMonth() == Month.JUNE
+                        && date.getDayOfMonth() == 4;
+
+        return asNormal || diamondJubilee;
+    }
+
+    private boolean isSpecialBankHoliday(LocalDate date) {
+        boolean diamondJubilee =
+                date.getYear() == 2012
+                        && date.getMonth() == Month.JUNE
+                        && date.getDayOfMonth() == 5;
+
+        return diamondJubilee;
     }
 
     private boolean isGoodFriday(LocalDate date) {
@@ -149,9 +162,16 @@ public class WorkingDays {
     }
 
     private boolean isMayDayBankHoliday(LocalDate date) {
-        return date.getMonth() == Month.MAY
-                && date.getDayOfWeek() == MONDAY
-                && date.getDayOfMonth() <= 7;
+        boolean asNormal =
+                date.getYear() != 2020
+                        && date.getMonth() == Month.MAY
+                        && date.getDayOfWeek() == MONDAY
+                        && date.getDayOfMonth() <= 7;
+
+        boolean veDay =
+                date.getYear() == 2020 && date.getMonth() == Month.MAY && date.getDayOfMonth() == 8;
+
+        return asNormal || veDay;
     }
 
     private boolean isAugustBankHoliday(LocalDate date) {
@@ -195,12 +215,29 @@ public class WorkingDays {
 
         boolean christmasDuringTheWeek = date.getDayOfMonth() == 26 && !isTheWeekend(date);
         boolean christmasOnSunday = date.getDayOfMonth() == 27 && date.getDayOfWeek() == TUESDAY;
-        boolean christmasOnSaturday = date.getDayOfMonth() == 28 && date.getDayOfWeek() == TUESDAY;
+        boolean christmasOnSaturday =
+                date.getDayOfMonth() == 28
+                        && (date.getDayOfWeek() == TUESDAY || date.getDayOfWeek() == MONDAY);
 
         return christmasDuringTheWeek || christmasOnSunday || christmasOnSaturday;
     }
 
     private boolean isTheWeekend(LocalDate date) {
         return date.getDayOfWeek() == SATURDAY || date.getDayOfWeek() == SUNDAY;
+    }
+
+    boolean isPublicHoliday(LocalDate date) {
+        Stream<Predicate<LocalDate>> not =
+                Stream.of(
+                        this::isChristmasDayOrBoxingDay,
+                        this::isNewYearsDay,
+                        this::isAugustBankHoliday,
+                        this::isMayDayBankHoliday,
+                        this::isEndOfMayBankHoliday,
+                        this::isGoodFriday,
+                        this::isEasterMonday,
+                        this::isSpecialBankHoliday);
+
+        return not.anyMatch(p -> p.test(date));
     }
 }
