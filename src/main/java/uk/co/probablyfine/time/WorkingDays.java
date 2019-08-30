@@ -215,11 +215,13 @@ public class WorkingDays {
 
         boolean christmasDuringTheWeek = date.getDayOfMonth() == 26 && !isTheWeekend(date);
         boolean christmasOnSunday = date.getDayOfMonth() == 27 && date.getDayOfWeek() == TUESDAY;
-        boolean christmasOnSaturday =
-                date.getDayOfMonth() == 28
-                        && (date.getDayOfWeek() == TUESDAY || date.getDayOfWeek() == MONDAY);
+        boolean christmasOnSaturday = date.getDayOfMonth() == 28 && date.getDayOfWeek() == TUESDAY;
+        boolean christmasOnFriday = date.getDayOfMonth() == 28 && date.getDayOfWeek() == MONDAY;
 
-        return christmasDuringTheWeek || christmasOnSunday || christmasOnSaturday;
+        return christmasDuringTheWeek
+                || christmasOnSunday
+                || christmasOnSaturday
+                || christmasOnFriday;
     }
 
     private boolean isTheWeekend(LocalDate date) {
