@@ -97,12 +97,12 @@ public class WorkingDaysTest {
         assertWorkingDaysRelationship(date(2019, 4, 18), 1, date(2019, 4, 23));
     }
 
-    private void assertWorkingDaysRelationship(LocalDate start, int days, LocalDate endDate) {
+    private void assertWorkingDaysRelationship(LocalDate start, int days, LocalDate end) {
         LocalDate expectedEnd = workingDays.daysAfter(start, days);
-        LocalDate expectedStart = workingDays.daysBefore(endDate, days);
-        int expectedDaysBetween = workingDays.daysBetween(start, endDate);
+        LocalDate expectedStart = workingDays.daysBefore(end, days);
+        int expectedDaysBetween = workingDays.daysBetween(start, end);
 
-        assertThat(expectedEnd, is(endDate));
+        assertThat(expectedEnd, is(end));
         assertThat(expectedDaysBetween, is(days));
         assertThat(expectedStart, is(start));
     }
