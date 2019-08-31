@@ -8,6 +8,7 @@ import java.time.LocalDate;
 public interface HolidayCalendar {
 
     HolidayCalendar ENGLAND_AND_WALES = new EnglandAndWales();
+    HolidayCalendar UNITED_STATES = new UnitedStates();
 
     boolean isPublicHoliday(LocalDate date);
 
