@@ -57,4 +57,13 @@ public class WorkingDaysUnitedStatesTest implements WorkingDaysTest {
         // Labor Day is observed on 7th September in 2020
         assertWorkingDaysRelationship(date(2020, 9, 4), 1, date(2020, 9, 8));
     }
+
+    @Test
+    public void shouldHandleColumbusDay() {
+        // Columbus Day is observed on 14th October in 2019
+        assertWorkingDaysRelationship(date(2019, 10, 11), 1, date(2019, 10, 15));
+
+        // Columbus Day is observed on 14th October in 2020
+        assertWorkingDaysRelationship(date(2020, 10, 9), 1, date(2020, 10, 13));
+    }
 }
