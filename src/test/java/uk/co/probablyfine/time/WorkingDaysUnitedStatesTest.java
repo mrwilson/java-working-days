@@ -66,4 +66,16 @@ public class WorkingDaysUnitedStatesTest implements WorkingDaysTest {
         // Columbus Day is observed on 14th October in 2020
         assertWorkingDaysRelationship(date(2020, 10, 9), 1, date(2020, 10, 13));
     }
+
+    @Test
+    public void shouldHandleVeteransDay() {
+        // Columbus Day is observed on 11th November in 2019
+        assertWorkingDaysRelationship(date(2019, 11, 8), 1, date(2019, 11, 12));
+
+        // Columbus Day was observed on 10th November in 2017
+        assertWorkingDaysRelationship(date(2017, 11, 9), 1, date(2017, 11, 13));
+
+        // Columbus Day was observed on 12th November in 2018
+        assertWorkingDaysRelationship(date(2018, 11, 9), 1, date(2018, 11, 13));
+    }
 }
