@@ -1,15 +1,17 @@
 package uk.co.probablyfine.time;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 import static uk.co.probablyfine.time.calendars.HolidayCalendar.ENGLAND_AND_WALES;
 
-import java.time.LocalDate;
 import org.junit.Test;
 
-public class WorkingDaysEnglandAndWalesTest {
+public class WorkingDaysEnglandAndWalesTest implements WorkingDaysTest {
 
     private final WorkingDays workingDays = WorkingDays.usingCalendar(ENGLAND_AND_WALES);
+
+    @Override
+    public WorkingDays objectUnderTest() {
+        return this.workingDays;
+    }
 
     @Test
     public void shouldHandleWeekDays() {
@@ -95,19 +97,5 @@ public class WorkingDaysEnglandAndWalesTest {
     public void shouldHandleMovingBankHoliday_Easter() {
         // Easter Sunday is the 21st in 2019
         assertWorkingDaysRelationship(date(2019, 4, 18), 1, date(2019, 4, 23));
-    }
-
-    private void assertWorkingDaysRelationship(LocalDate start, int days, LocalDate end) {
-        LocalDate expectedEnd = workingDays.daysAfter(start, days);
-        LocalDate expectedStart = workingDays.daysBefore(end, days);
-        int expectedDaysBetween = workingDays.daysBetween(start, end);
-
-        assertThat(expectedEnd, is(end));
-        assertThat(expectedDaysBetween, is(days));
-        assertThat(expectedStart, is(start));
-    }
-
-    private LocalDate date(int year, int month, int day) {
-        return LocalDate.of(year, month, day);
     }
 }
