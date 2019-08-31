@@ -13,7 +13,8 @@ public class UnitedStates implements HolidayCalendar {
                 || isPresidentsDay(date)
                 || isMemorialDay(date)
                 || isIndependenceDay(date)
-                || isLaborDay(date);
+                || isLaborDay(date)
+                || isColumbusDay(date);
     }
 
     private boolean isMlkJrDay(LocalDate date) {
@@ -52,5 +53,12 @@ public class UnitedStates implements HolidayCalendar {
         return date.getMonth() == Month.SEPTEMBER
                 && date.getDayOfWeek() == DayOfWeek.MONDAY
                 && date.getDayOfMonth() <= 7;
+    }
+
+    private boolean isColumbusDay(LocalDate date) {
+        return date.getMonth() == Month.OCTOBER
+                && date.getDayOfWeek() == DayOfWeek.MONDAY
+                && date.getDayOfMonth() >= 8
+                && date.getDayOfMonth() <= 14;
     }
 }
