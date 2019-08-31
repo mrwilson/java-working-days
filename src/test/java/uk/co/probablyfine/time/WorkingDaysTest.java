@@ -2,14 +2,14 @@ package uk.co.probablyfine.time;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static uk.co.probablyfine.time.calendars.HolidayCalendar.ENGLAND_AND_WALES;
 
 import java.time.LocalDate;
 import org.junit.Test;
-import uk.co.probablyfine.time.calendars.HolidayCalendar;
 
 public class WorkingDaysTest {
 
-    private final WorkingDays workingDays = new WorkingDays(HolidayCalendar.ENGLAND_AND_WALES);
+    private final WorkingDays workingDays = WorkingDays.usingCalendar(ENGLAND_AND_WALES);
 
     @Test
     public void shouldHandleWeekDays() {
