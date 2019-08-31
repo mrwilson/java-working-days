@@ -48,4 +48,13 @@ public class WorkingDaysUnitedStatesTest implements WorkingDaysTest {
         // Independence Day is observed on 5th July in 2021
         assertWorkingDaysRelationship(date(2021, 7, 2), 1, date(2021, 7, 6));
     }
+
+    @Test
+    public void shouldHandleLaborDay() {
+        // Labor Day is observed on 2nd September in 2019
+        assertWorkingDaysRelationship(date(2019, 8, 30), 1, date(2019, 9, 3));
+
+        // Labor Day is observed on 7th September in 2020
+        assertWorkingDaysRelationship(date(2020, 9, 4), 1, date(2020, 9, 8));
+    }
 }
