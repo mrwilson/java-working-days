@@ -13,93 +13,98 @@ public class WorkingDaysTest {
 
     @Test
     public void shouldHandleWeekDays() {
-        assertWorkingDaysAfter(date(2019, 4, 1), 4, date(2019, 4, 5));
+        assertWorkingDaysRelationship(date(2019, 4, 1), 4, date(2019, 4, 5));
     }
 
     @Test
     public void shouldHandleWeekDaysOverWeekend() {
-        assertWorkingDaysAfter(date(2019, 4, 1), 5, date(2019, 4, 8));
+        assertWorkingDaysRelationship(date(2019, 4, 1), 5, date(2019, 4, 8));
     }
 
     @Test
     public void shouldHandleWeekDaysOverEndOfFeb_NoLeapYear() {
-        assertWorkingDaysAfter(date(2019, 2, 28), 1, date(2019, 3, 1));
+        assertWorkingDaysRelationship(date(2019, 2, 28), 1, date(2019, 3, 1));
     }
 
     @Test
     public void shouldHandleWeekDaysOverEndOfFeb_LeapYear() {
-        assertWorkingDaysAfter(date(2012, 2, 28), 2, date(2012, 3, 1));
+        assertWorkingDaysRelationship(date(2012, 2, 28), 2, date(2012, 3, 1));
     }
 
     @Test
     public void shouldHandleChristmasBankHolidays() {
-        assertWorkingDaysAfter(date(2019, 12, 24), 1, date(2019, 12, 27));
+        assertWorkingDaysRelationship(date(2019, 12, 24), 1, date(2019, 12, 27));
     }
 
     @Test
     public void shouldHandleNewYearsDay() {
-        assertWorkingDaysAfter(date(2019, 12, 31), 1, date(2020, 1, 2));
+        assertWorkingDaysRelationship(date(2019, 12, 31), 1, date(2020, 1, 2));
     }
 
     @Test
     public void shouldHandleNewYearsDayOnSaturday() {
-        assertWorkingDaysAfter(date(2021, 12, 31), 1, date(2022, 1, 4));
+        assertWorkingDaysRelationship(date(2021, 12, 31), 1, date(2022, 1, 4));
     }
 
     @Test
     public void shouldHandleNewYearsDayOnSunday() {
-        assertWorkingDaysAfter(date(2016, 12, 30), 1, date(2017, 1, 3));
+        assertWorkingDaysRelationship(date(2016, 12, 30), 1, date(2017, 1, 3));
     }
 
     @Test
     public void shouldHandleWhenChristmasAndNewYearBothFallAtTheWeekend() {
-        assertWorkingDaysAfter(date(2021, 12, 24), 1, date(2021, 12, 29));
+        assertWorkingDaysRelationship(date(2021, 12, 24), 1, date(2021, 12, 29));
     }
 
     @Test
     public void shouldHandleWhenChristmasFallsOnSunday() {
-        assertWorkingDaysAfter(date(2022, 12, 23), 1, date(2022, 12, 28));
+        assertWorkingDaysRelationship(date(2022, 12, 23), 1, date(2022, 12, 28));
     }
 
     @Test
     public void shouldHandleMovingBankHoliday_August() {
         // Aug Bank Holiday is the 26th in 2019
-        assertWorkingDaysAfter(date(2019, 8, 23), 1, date(2019, 8, 27));
+        assertWorkingDaysRelationship(date(2019, 8, 23), 1, date(2019, 8, 27));
 
         // Aug Bank Holiday is the 31st in 2020
-        assertWorkingDaysAfter(date(2020, 8, 28), 1, date(2020, 9, 1));
+        assertWorkingDaysRelationship(date(2020, 8, 28), 1, date(2020, 9, 1));
 
         // Aug Bank Holiday is the 30th in 2021
-        assertWorkingDaysAfter(date(2021, 8, 27), 1, date(2021, 8, 31));
+        assertWorkingDaysRelationship(date(2021, 8, 27), 1, date(2021, 8, 31));
     }
 
     @Test
     public void shouldHandleMovingBankHoliday_May() {
         // May Bank Holiday is the 6th in 2019
-        assertWorkingDaysAfter(date(2019, 5, 3), 1, date(2019, 5, 7));
+        assertWorkingDaysRelationship(date(2019, 5, 3), 1, date(2019, 5, 7));
 
         // May Bank Holiday is the 1st in 2028
-        assertWorkingDaysAfter(date(2028, 4, 28), 1, date(2028, 5, 2));
+        assertWorkingDaysRelationship(date(2028, 4, 28), 1, date(2028, 5, 2));
 
         // May Bank Holiday is the 7th in 2029
-        assertWorkingDaysAfter(date(2029, 5, 4), 1, date(2029, 5, 8));
+        assertWorkingDaysRelationship(date(2029, 5, 4), 1, date(2029, 5, 8));
     }
 
     @Test
     public void shouldHandleMovingBankHoliday_EndOfMay() {
         // End of May Bank Holiday is the 27th in 2019
-        assertWorkingDaysAfter(date(2019, 5, 24), 1, date(2019, 5, 28));
+        assertWorkingDaysRelationship(date(2019, 5, 24), 1, date(2019, 5, 28));
     }
 
     @Test
     public void shouldHandleMovingBankHoliday_Easter() {
         // Easter Sunday is the 21st in 2019
-        assertWorkingDaysAfter(date(2019, 4, 18), 1, date(2019, 4, 23));
+        assertWorkingDaysRelationship(date(2019, 4, 18), 1, date(2019, 4, 23));
     }
 
-    private void assertWorkingDaysAfter(LocalDate start, int numberOfDaysAfter, LocalDate end) {
-        assertThat(workingDays.after(start, numberOfDaysAfter), is(end));
-        assertThat(workingDays.daysBetween(start, end), is(numberOfDaysAfter));
+    private void assertWorkingDaysRelationship(LocalDate start, int days, LocalDate endDate) {
+        LocalDate expectedEnd = workingDays.after(start, days);
+        LocalDate expectedStart = workingDays.daysBefore(endDate, days);
+        int expectedDaysBetween = workingDays.daysBetween(start, endDate);
+
+        assertThat(expectedEnd, is(endDate));
+        assertThat(expectedDaysBetween, is(days));
+        assertThat(expectedStart, is(start));
     }
 
     private LocalDate date(int year, int month, int day) {

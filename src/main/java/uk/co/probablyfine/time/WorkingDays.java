@@ -4,11 +4,14 @@ import static java.util.function.Predicate.not;
 import static java.util.stream.Collectors.toList;
 
 import java.time.LocalDate;
+import java.time.Period;
 import uk.co.probablyfine.time.calendars.HolidayCalendar;
 
 public class WorkingDays {
 
     private static final LocalDate ARBITRARY_END = LocalDate.of(2099, 1, 1);
+    private static final LocalDate ARBITRARY_START = LocalDate.of(1970, 1, 1);
+    private static final Period REVERSE_ORDER = Period.ofDays(-1);
 
     private final HolidayCalendar calendar;
 
@@ -31,6 +34,14 @@ public class WorkingDays {
                 .filter(not(calendar::isPublicHoliday))
                 .collect(toList())
                 .size();
+    }
 
+    public LocalDate daysBefore(LocalDate end, int daysBefore) {
+        return end.datesUntil(ARBITRARY_START, REVERSE_ORDER)
+                .filter(not(HolidayCalendar::isTheWeekend))
+                .filter(not(calendar::isPublicHoliday))
+                .limit(daysBefore + 1)
+                .collect(toList())
+                .get(daysBefore);
     }
 }
