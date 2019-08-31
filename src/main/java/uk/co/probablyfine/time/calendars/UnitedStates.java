@@ -7,7 +7,7 @@ import java.time.Month;
 public class UnitedStates implements HolidayCalendar {
     @Override
     public boolean isPublicHoliday(LocalDate date) {
-        return isMlkJrDay(date) || isPresidentsDay(date);
+        return isMlkJrDay(date) || isPresidentsDay(date) || isMemorialDay(date);
     }
 
     private boolean isMlkJrDay(LocalDate date) {
@@ -22,5 +22,11 @@ public class UnitedStates implements HolidayCalendar {
                 && date.getDayOfWeek() == DayOfWeek.MONDAY
                 && date.getDayOfMonth() >= 15
                 && date.getDayOfMonth() <= 21;
+    }
+
+    private boolean isMemorialDay(LocalDate date) {
+        return date.getMonth() == Month.MAY
+                && date.getDayOfWeek() == DayOfWeek.MONDAY
+                && date.getDayOfMonth() >= 25;
     }
 }
