@@ -36,4 +36,16 @@ public class WorkingDaysUnitedStatesTest implements WorkingDaysTest {
         // Memorial Day is 25th May in 2020
         assertWorkingDaysRelationship(date(2020, 5, 22), 1, date(2020, 5, 26));
     }
+
+    @Test
+    public void shouldHandleIndependenceDay() {
+        // Independence Day was 4th July in 2019
+        assertWorkingDaysRelationship(date(2019, 7, 3), 1, date(2019, 7, 5));
+
+        // Independence Day is observed on 3rd July in 2020
+        assertWorkingDaysRelationship(date(2020, 7, 2), 1, date(2020, 7, 6));
+
+        // Independence Day is observed on 5th July in 2021
+        assertWorkingDaysRelationship(date(2021, 7, 2), 1, date(2021, 7, 6));
+    }
 }
