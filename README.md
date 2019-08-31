@@ -8,12 +8,19 @@
 
 ## Examples
 
-```java
-WorkingDays workingDays = new WorkingDays();
+The `java-working-days` library exposes three methods as partial inverses to each-other.
 
-workingDays.after(LocalDate.of(2019, 1, 1), 10);
+```java
+import static uk.co.probablyfine.time.calendars.HolidayCalendar.ENGLAND_AND_WALES;
+
+WorkingDays workingDays = WorkingDays.usingCalendar(ENGLAND_AND_WALES);
+
+workingDays.daysAfter(LocalDate.of(2019, 1, 1), 10);
 // LocalDate[2019, 1, 16]
 
-workingDays.isPublicHoliday(LocalDate.of(2020, 5, 8))
-// true (75th anniversary of VE Day)
+workingDays.daysBefore(LocalDate.of(2019, 1, 16), 10)
+// LocalDate[2019, 1, 1]
+
+workingDays.daysBetween(LocalDate.of(2019, 1, 16), LocalDate.of(2019, 1, 1))
+// 10
 ```
