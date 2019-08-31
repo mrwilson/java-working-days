@@ -21,10 +21,10 @@ public class WorkingDaysUnitedStatesTest implements WorkingDaysTest {
 
     @Test
     public void shouldHandlePresidentsDay() {
-        //        February 18
+        // President's Day was 18th February in 2019
         assertWorkingDaysRelationship(date(2019, 2, 15), 1, date(2019, 2, 19));
 
-        //        February 15 to 21
-
+        // President's Day is 17th February in 2020
+        assertWorkingDaysRelationship(date(2020, 2, 14), 1, date(2020, 2, 18));
     }
 }
