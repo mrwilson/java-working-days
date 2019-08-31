@@ -15,8 +15,12 @@ public class WorkingDays {
 
     private final HolidayCalendar calendar;
 
-    public WorkingDays(HolidayCalendar calendar) {
+    private WorkingDays(HolidayCalendar calendar) {
         this.calendar = calendar;
+    }
+
+    public static WorkingDays usingCalendar(HolidayCalendar calendar) {
+        return new WorkingDays(calendar);
     }
 
     public LocalDate daysAfter(LocalDate start, int daysAfter) {
