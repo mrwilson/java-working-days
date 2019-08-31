@@ -19,7 +19,7 @@ public class WorkingDays {
         this.calendar = calendar;
     }
 
-    public LocalDate after(LocalDate start, int daysAfter) {
+    public LocalDate daysAfter(LocalDate start, int daysAfter) {
         return start.datesUntil(ARBITRARY_END)
                 .filter(not(HolidayCalendar::isTheWeekend))
                 .filter(not(calendar::isPublicHoliday))

@@ -98,7 +98,7 @@ public class WorkingDaysTest {
     }
 
     private void assertWorkingDaysRelationship(LocalDate start, int days, LocalDate endDate) {
-        LocalDate expectedEnd = workingDays.after(start, days);
+        LocalDate expectedEnd = workingDays.daysAfter(start, days);
         LocalDate expectedStart = workingDays.daysBefore(endDate, days);
         int expectedDaysBetween = workingDays.daysBetween(start, endDate);
 
