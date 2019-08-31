@@ -24,4 +24,13 @@ public class WorkingDays {
                 .collect(toList())
                 .get(daysAfter);
     }
+
+    public int daysBetween(LocalDate start, LocalDate end) {
+        return start.datesUntil(end)
+                .filter(not(HolidayCalendar::isTheWeekend))
+                .filter(not(calendar::isPublicHoliday))
+                .collect(toList())
+                .size();
+
+    }
 }

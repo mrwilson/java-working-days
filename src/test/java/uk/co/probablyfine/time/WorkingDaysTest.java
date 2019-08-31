@@ -98,8 +98,8 @@ public class WorkingDaysTest {
     }
 
     private void assertWorkingDaysAfter(LocalDate start, int numberOfDaysAfter, LocalDate end) {
-        LocalDate expected = workingDays.after(start, numberOfDaysAfter);
-        assertThat(expected, is(end));
+        assertThat(workingDays.after(start, numberOfDaysAfter), is(end));
+        assertThat(workingDays.daysBetween(start, end), is(numberOfDaysAfter));
     }
 
     private LocalDate date(int year, int month, int day) {
