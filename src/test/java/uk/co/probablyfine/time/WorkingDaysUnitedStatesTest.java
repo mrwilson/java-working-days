@@ -78,4 +78,16 @@ public class WorkingDaysUnitedStatesTest implements WorkingDaysTest {
         // Columbus Day was observed on 12th November in 2018
         assertWorkingDaysRelationship(date(2018, 11, 9), 1, date(2018, 11, 13));
     }
+
+    @Test
+    public void shouldHandleThanksgivingDay() {
+        // Thanksgiving Day is observed on 28th November in 2019
+        assertWorkingDaysRelationship(date(2019, 11, 27), 1, date(2019, 11, 29));
+
+        // Thanksgiving Day is observed on 26th November in 2020
+        assertWorkingDaysRelationship(date(2020, 11, 25), 1, date(2020, 11, 27));
+
+        // Thanksgiving Day is observed on 25th November in 2021
+        assertWorkingDaysRelationship(date(2021, 11, 24), 1, date(2021, 11, 26));
+    }
 }
