@@ -5,10 +5,11 @@ import static org.junit.Assert.assertThat;
 
 import java.time.LocalDate;
 import org.junit.Test;
+import uk.co.probablyfine.time.calendars.HolidayCalendar;
 
 public class WorkingDaysTest {
 
-    private final WorkingDays workingDays = new WorkingDays();
+    private final WorkingDays workingDays = new WorkingDays(HolidayCalendar.ENGLAND_AND_WALES);
 
     @Test
     public void shouldHandleWeekDays() {

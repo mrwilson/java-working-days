@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+import uk.co.probablyfine.time.calendars.HolidayCalendar;
 
 @RunWith(Parameterized.class)
 public class WorkingDaysEnglandWalesHistoricTest {
@@ -27,7 +28,7 @@ public class WorkingDaysEnglandWalesHistoricTest {
 
     private static final Path ENGLAND_AND_WALES =
             Paths.get("src/test/resources/historic_dates_england_and_wales.csv");
-    private static final WorkingDays workingDays = new WorkingDays();
+    private static final HolidayCalendar calendar = HolidayCalendar.ENGLAND_AND_WALES;
 
     public WorkingDaysEnglandWalesHistoricTest(Example example) {
         this.example = example;
@@ -37,7 +38,7 @@ public class WorkingDaysEnglandWalesHistoricTest {
     public void shouldListHistoricPublicHolidays() {
         String message = String.format("%s was not detected", example);
 
-        assertTrue(message, workingDays.isPublicHoliday(example.date));
+        assertTrue(message, calendar.isPublicHoliday(example.date));
     }
 
     private static Example toExample(String input) {
