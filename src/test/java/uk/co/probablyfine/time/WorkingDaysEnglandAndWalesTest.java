@@ -7,7 +7,7 @@ import static uk.co.probablyfine.time.calendars.HolidayCalendar.ENGLAND_AND_WALE
 import java.time.LocalDate;
 import org.junit.Test;
 
-public class WorkingDaysTest {
+public class WorkingDaysEnglandAndWalesTest {
 
     private final WorkingDays workingDays = WorkingDays.usingCalendar(ENGLAND_AND_WALES);
 
