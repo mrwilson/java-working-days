@@ -18,4 +18,13 @@ public class WorkingDaysUnitedStatesTest implements WorkingDaysTest {
         // MLK Jr day is 20th January in 2020
         assertWorkingDaysRelationship(date(2020, 1, 17), 1, date(2020, 1, 21));
     }
+
+    @Test
+    public void shouldHandlePresidentsDay() {
+        //        February 18
+        assertWorkingDaysRelationship(date(2019, 2, 15), 1, date(2019, 2, 19));
+
+        //        February 15 to 21
+
+    }
 }
