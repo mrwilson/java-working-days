@@ -12,7 +12,8 @@ public class UnitedStates implements HolidayCalendar {
         return isMlkJrDay(date)
                 || isPresidentsDay(date)
                 || isMemorialDay(date)
-                || isIndependenceDay(date);
+                || isIndependenceDay(date)
+                || isLaborDay(date);
     }
 
     private boolean isMlkJrDay(LocalDate date) {
@@ -45,5 +46,11 @@ public class UnitedStates implements HolidayCalendar {
         boolean onSunday = date.getDayOfMonth() == 5 && date.getDayOfWeek() == DayOfWeek.MONDAY;
 
         return asNormal || onSaturday || onSunday;
+    }
+
+    private boolean isLaborDay(LocalDate date) {
+        return date.getMonth() == Month.SEPTEMBER
+                && date.getDayOfWeek() == DayOfWeek.MONDAY
+                && date.getDayOfMonth() <= 7;
     }
 }
