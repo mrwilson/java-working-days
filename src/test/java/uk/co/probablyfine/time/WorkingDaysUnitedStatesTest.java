@@ -102,4 +102,16 @@ public class WorkingDaysUnitedStatesTest implements WorkingDaysTest {
         // Christmas Day is observed on 26th December in 2022
         assertWorkingDaysRelationship(date(2022, 12, 23), 1, date(2022, 12, 27));
     }
+
+    @Test
+    public void shouldHandleNewYearsDay() {
+        // New Year's Day was observed on 1st January in 2019
+        assertWorkingDaysRelationship(date(2018, 12, 31), 1, date(2019, 1, 2));
+
+        // New Year's Day is observed on 31st December in 2022
+        assertWorkingDaysRelationship(date(2021, 12, 30), 1, date(2022, 1, 3));
+
+        // New Year's Day is observed on 2nd January in 2023
+        assertWorkingDaysRelationship(date(2022, 12, 30), 1, date(2023, 1, 3));
+    }
 }
