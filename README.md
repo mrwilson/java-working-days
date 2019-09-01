@@ -24,3 +24,11 @@ workingDays.daysBefore(LocalDate.of(2019, 1, 16), 10)
 workingDays.daysBetween(LocalDate.of(2019, 1, 16), LocalDate.of(2019, 1, 1))
 // 10
 ```
+
+## Supported Calendars
+
+- [x] 🏴󠁧󠁢󠁥󠁮󠁧󠁿🏴󠁧󠁢󠁷󠁬󠁳󠁿 England & Wales 
+- [x] 🇺🇸 United States
+- [ ] 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland
+- [ ] 🇬🇧 Northern Ireland
+- [ ] 🇫🇷 France
