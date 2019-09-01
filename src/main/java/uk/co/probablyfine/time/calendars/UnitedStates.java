@@ -41,15 +41,7 @@ public class UnitedStates implements HolidayCalendar {
     }
 
     private boolean isIndependenceDay(LocalDate date) {
-        if (date.getMonth() != Month.JULY) {
-            return false;
-        }
-
-        boolean asNormal = date.getDayOfMonth() == 4 && !isTheWeekend(date);
-        boolean onSaturday = date.getDayOfMonth() == 3 && date.getDayOfWeek() == DayOfWeek.FRIDAY;
-        boolean onSunday = date.getDayOfMonth() == 5 && date.getDayOfWeek() == DayOfWeek.MONDAY;
-
-        return asNormal || onSaturday || onSunday;
+        return fixedDateFederalHoliday(4, Month.JULY, date);
     }
 
     private boolean isLaborDay(LocalDate date) {
@@ -66,15 +58,7 @@ public class UnitedStates implements HolidayCalendar {
     }
 
     private boolean isVeteransDay(LocalDate date) {
-        if (date.getMonth() != Month.NOVEMBER) {
-            return false;
-        }
-
-        boolean asNormal = date.getDayOfMonth() == 11 && !isTheWeekend(date);
-        boolean onSaturday = date.getDayOfMonth() == 10 && date.getDayOfWeek() == DayOfWeek.FRIDAY;
-        boolean onSunday = date.getDayOfMonth() == 12 && date.getDayOfWeek() == DayOfWeek.MONDAY;
-
-        return asNormal || onSaturday || onSunday;
+        return fixedDateFederalHoliday(11, Month.NOVEMBER, date);
     }
 
     private boolean isThanksgivingDay(LocalDate date) {
@@ -85,13 +69,17 @@ public class UnitedStates implements HolidayCalendar {
     }
 
     private boolean isChristmasDay(LocalDate date) {
-        if (date.getMonth() != Month.DECEMBER) {
+        return fixedDateFederalHoliday(25, Month.DECEMBER, date);
+    }
+
+    private boolean fixedDateFederalHoliday(int day, Month month, LocalDate date) {
+        if (date.getMonth() != month) {
             return false;
         }
 
-        boolean asNormal = date.getDayOfMonth() == 25 && !isTheWeekend(date);
-        boolean onSaturday = date.getDayOfMonth() == 24 && date.getDayOfWeek() == DayOfWeek.FRIDAY;
-        boolean onSunday = date.getDayOfMonth() == 26 && date.getDayOfWeek() == DayOfWeek.MONDAY;
+        boolean asNormal = date.getDayOfMonth() == day && !isTheWeekend(date);
+        boolean onSaturday = date.getDayOfMonth() == (day - 1) && date.getDayOfWeek() == DayOfWeek.FRIDAY;
+        boolean onSunday = date.getDayOfMonth() == (day + 1) && date.getDayOfWeek() == DayOfWeek.MONDAY;
 
         return asNormal || onSaturday || onSunday;
     }
