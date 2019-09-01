@@ -17,7 +17,8 @@ public class EnglandAndWales implements HolidayCalendar {
                 || isGoodFriday(date)
                 || isEasterMonday(date)
                 || isAugustBankHoliday(date)
-                || isChristmasDayOrBoxingDay(date)
+                || isChristmasDay(date)
+                || isBoxingDay(date)
                 || isSpecialBankHoliday(date);
     }
 
@@ -189,10 +190,6 @@ public class EnglandAndWales implements HolidayCalendar {
         boolean onSunday = date.getDayOfWeek() == MONDAY && date.getDayOfMonth() == 2;
 
         return duringTheWeek || onSaturday || onSunday;
-    }
-
-    private boolean isChristmasDayOrBoxingDay(LocalDate date) {
-        return isChristmasDay(date) || isBoxingDay(date);
     }
 
     private boolean isChristmasDay(LocalDate date) {
