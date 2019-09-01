@@ -27,8 +27,8 @@ workingDays.daysBetween(LocalDate.of(2019, 1, 16), LocalDate.of(2019, 1, 1))
 
 ## Supported Calendars
 
-- [x] 🏴󠁧󠁢󠁥󠁮󠁧󠁿🏴󠁧󠁢󠁷󠁬󠁳󠁿 England & Wales 
-- [x] 🇺🇸 United States
-- [ ] 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland
-- [ ] 🇬🇧 Northern Ireland
-- [ ] 🇫🇷 France
+- [x] England & Wales 
+- [x] United States
+- [ ] Scotland
+- [ ] Northern Ireland
+- [ ] France
