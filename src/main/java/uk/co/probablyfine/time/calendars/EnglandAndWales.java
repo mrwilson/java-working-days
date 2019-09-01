@@ -5,25 +5,20 @@ import static java.time.DayOfWeek.TUESDAY;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class EnglandAndWales implements HolidayCalendar {
 
     @Override
     public boolean isPublicHoliday(LocalDate date) {
-        Stream<Predicate<LocalDate>> publicHolidays =
-                Stream.of(
-                        this::isChristmasDayOrBoxingDay,
-                        this::isNewYearsDay,
-                        this::isAugustBankHoliday,
-                        this::isMayDayBankHoliday,
-                        this::isEndOfMayBankHoliday,
-                        this::isGoodFriday,
-                        this::isEasterMonday,
-                        this::isSpecialBankHoliday);
-
-        return publicHolidays.anyMatch(p -> p.test(date));
+        return isNewYearsDay(date)
+                || isMayDayBankHoliday(date)
+                || isEndOfMayBankHoliday(date)
+                || isGoodFriday(date)
+                || isEasterMonday(date)
+                || isAugustBankHoliday(date)
+                || isChristmasDayOrBoxingDay(date)
+                || isSpecialBankHoliday(date);
     }
 
     private boolean isEndOfMayBankHoliday(LocalDate date) {
