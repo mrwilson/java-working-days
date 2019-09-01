@@ -16,7 +16,8 @@ public class UnitedStates implements HolidayCalendar {
                 || isLaborDay(date)
                 || isColumbusDay(date)
                 || isVeteransDay(date)
-                || isThanksgivingDay(date);
+                || isThanksgivingDay(date)
+                || isChristmasDay(date);
     }
 
     private boolean isMlkJrDay(LocalDate date) {
@@ -81,5 +82,17 @@ public class UnitedStates implements HolidayCalendar {
                 && date.getDayOfWeek() == DayOfWeek.THURSDAY
                 && date.getDayOfMonth() >= 22
                 && date.getDayOfMonth() <= 28;
+    }
+
+    private boolean isChristmasDay(LocalDate date) {
+        if (date.getMonth() != Month.DECEMBER) {
+            return false;
+        }
+
+        boolean asNormal = date.getDayOfMonth() == 25 && !isTheWeekend(date);
+        boolean onSaturday = date.getDayOfMonth() == 24 && date.getDayOfWeek() == DayOfWeek.FRIDAY;
+        boolean onSunday = date.getDayOfMonth() == 26 && date.getDayOfWeek() == DayOfWeek.MONDAY;
+
+        return asNormal || onSaturday || onSunday;
     }
 }

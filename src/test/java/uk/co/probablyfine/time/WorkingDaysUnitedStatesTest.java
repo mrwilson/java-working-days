@@ -90,4 +90,16 @@ public class WorkingDaysUnitedStatesTest implements WorkingDaysTest {
         // Thanksgiving Day is observed on 25th November in 2021
         assertWorkingDaysRelationship(date(2021, 11, 24), 1, date(2021, 11, 26));
     }
+
+    @Test
+    public void shouldHandleChristmasDay() {
+        // Christmas Day is observed on 25th December in 2019
+        assertWorkingDaysRelationship(date(2019, 12, 24), 1, date(2019, 12, 26));
+
+        // Christmas Day is observed on 24th December in 2021
+        assertWorkingDaysRelationship(date(2021, 12, 23), 1, date(2021, 12, 27));
+
+        // Christmas Day is observed on 26th December in 2022
+        assertWorkingDaysRelationship(date(2022, 12, 23), 1, date(2022, 12, 27));
+    }
 }
