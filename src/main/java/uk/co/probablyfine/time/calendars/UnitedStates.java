@@ -9,7 +9,8 @@ import java.time.Month;
 public class UnitedStates implements HolidayCalendar {
     @Override
     public boolean isPublicHoliday(LocalDate date) {
-        return isMlkJrDay(date)
+        return isNewYearsDay(date)
+                || isMlkJrDay(date)
                 || isPresidentsDay(date)
                 || isMemorialDay(date)
                 || isIndependenceDay(date)
@@ -72,14 +73,34 @@ public class UnitedStates implements HolidayCalendar {
         return fixedDateFederalHoliday(25, Month.DECEMBER, date);
     }
 
+    private boolean isNewYearsDay(LocalDate date) {
+
+        boolean asNormal =
+                date.getMonth() == Month.JANUARY
+                        && date.getDayOfMonth() == 1
+                        && !isTheWeekend(date);
+        boolean onSaturday =
+                date.getMonth() == Month.DECEMBER
+                        && date.getDayOfMonth() == 31
+                        && date.getDayOfWeek() == DayOfWeek.FRIDAY;
+        boolean onSunday =
+                date.getMonth() == Month.JANUARY
+                        && date.getDayOfMonth() == 2
+                        && date.getDayOfWeek() == DayOfWeek.MONDAY;
+
+        return asNormal || onSaturday || onSunday;
+    }
+
     private boolean fixedDateFederalHoliday(int day, Month month, LocalDate date) {
         if (date.getMonth() != month) {
             return false;
         }
 
         boolean asNormal = date.getDayOfMonth() == day && !isTheWeekend(date);
-        boolean onSaturday = date.getDayOfMonth() == (day - 1) && date.getDayOfWeek() == DayOfWeek.FRIDAY;
-        boolean onSunday = date.getDayOfMonth() == (day + 1) && date.getDayOfWeek() == DayOfWeek.MONDAY;
+        boolean onSaturday =
+                date.getDayOfMonth() == (day - 1) && date.getDayOfWeek() == DayOfWeek.FRIDAY;
+        boolean onSunday =
+                date.getDayOfMonth() == (day + 1) && date.getDayOfWeek() == DayOfWeek.MONDAY;
 
         return asNormal || onSaturday || onSunday;
     }
