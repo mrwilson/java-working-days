@@ -49,12 +49,22 @@ public class WorkingDaysLogicTest implements WorkingDaysTest {
     }
 
     @Test
-    public void throwExceptionWhenInputDatesAreNull() {
+    public void daysBeforeThrowsExceptionWhenInputDateIsNull() {
         try {
             workingDays.daysBefore(null, 1);
             fail("Expected an exception, didn't get one");
         } catch (IllegalArgumentException e) {
             assertThat(e.getMessage(), is("Input 'end' should not be null"));
+        }
+    }
+
+    @Test
+    public void daysAfterThrowsExceptionWhenInputDateIsNull() {
+        try {
+            workingDays.daysAfter(null, 1);
+            fail("Expected an exception, didn't get one");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Input 'start' should not be null"));
         }
     }
 }

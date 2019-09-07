@@ -29,6 +29,10 @@ public class WorkingDays {
             return daysBefore(start, -daysAfter);
         }
 
+        if (start == null) {
+            throw new IllegalArgumentException("Input 'start' should not be null");
+        }
+
         return start.datesUntil(ARBITRARY_END)
                 .filter(not(HolidayCalendar::isTheWeekend))
                 .filter(not(calendar::isPublicHoliday))
