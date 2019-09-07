@@ -21,8 +21,8 @@ public interface WorkingDaysHistoricTest {
     }
 
     class Example {
-        final String name;
-        final LocalDate date;
+        public final String name;
+        public final LocalDate date;
 
         Example(String name, LocalDate date) {
             this.name = name;

@@ -1,7 +1,8 @@
-package uk.co.probablyfine.time;
+package uk.co.probablyfine.time.calendars;
 
 import org.junit.Test;
-import uk.co.probablyfine.time.calendars.HolidayCalendar;
+import uk.co.probablyfine.time.WorkingDays;
+import uk.co.probablyfine.time.WorkingDaysTest;
 
 public class WorkingDaysUnitedStatesTest implements WorkingDaysTest {
 

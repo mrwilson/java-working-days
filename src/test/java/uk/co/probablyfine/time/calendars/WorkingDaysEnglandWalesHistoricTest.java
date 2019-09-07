@@ -1,4 +1,4 @@
-package uk.co.probablyfine.time;
+package uk.co.probablyfine.time.calendars;
 
 import static org.junit.Assert.assertTrue;
 import static uk.co.probablyfine.time.WorkingDaysHistoricTest.loadExamples;
@@ -10,7 +10,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import uk.co.probablyfine.time.WorkingDaysHistoricTest.Example;
-import uk.co.probablyfine.time.calendars.HolidayCalendar;
 
 @RunWith(Parameterized.class)
 public class WorkingDaysEnglandWalesHistoricTest {

@@ -1,8 +1,10 @@
-package uk.co.probablyfine.time;
+package uk.co.probablyfine.time.calendars;
 
 import static uk.co.probablyfine.time.calendars.HolidayCalendar.ENGLAND_AND_WALES;
 
 import org.junit.Test;
+import uk.co.probablyfine.time.WorkingDays;
+import uk.co.probablyfine.time.WorkingDaysTest;
 
 public class WorkingDaysEnglandAndWalesTest implements WorkingDaysTest {
 
