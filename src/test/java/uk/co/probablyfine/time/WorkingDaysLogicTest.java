@@ -67,4 +67,31 @@ public class WorkingDaysLogicTest implements WorkingDaysTest {
             assertThat(e.getMessage(), is("Input 'start' should not be null"));
         }
     }
+
+    @Test
+    public void daysBetweenThrowsExceptionWhenEitherInputDateIsNull() {
+        try {
+            workingDays.daysBetween(null, date(2019, 1, 1));
+            fail("Expected an exception, didn't get one");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Input 'start' should not be null"));
+        }
+
+        try {
+            workingDays.daysBetween(date(2019, 1, 1), null);
+            fail("Expected an exception, didn't get one");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Input 'end' should not be null"));
+        }
+    }
+
+    @Test
+    public void daysBetweenThrowsExceptionWhenBothInputDatesAreNull() {
+        try {
+            workingDays.daysBetween(null, null);
+            fail("Expected an exception, didn't get one");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Inputs 'start' and 'end' should not be null"));
+        }
+    }
 }

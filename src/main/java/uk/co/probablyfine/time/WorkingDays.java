@@ -43,6 +43,18 @@ public class WorkingDays {
 
     public int daysBetween(LocalDate start, LocalDate end) {
 
+        if (start == null && end == null) {
+            throw new IllegalArgumentException("Inputs 'start' and 'end' should not be null");
+        }
+
+        if (start == null) {
+            throw new IllegalArgumentException("Input 'start' should not be null");
+        }
+
+        if (end == null) {
+            throw new IllegalArgumentException("Input 'end' should not be null");
+        }
+
         if (end.isBefore(start)) {
             return -daysBetween(end, start);
         }
