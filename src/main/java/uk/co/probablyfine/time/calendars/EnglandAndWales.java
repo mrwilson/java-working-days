@@ -158,7 +158,7 @@ public class EnglandAndWales implements HolidayCalendar {
                         LocalDate.of(2099, 4, 12))
                 .filter(easterSunday -> easterSunday.getYear() == year)
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(RuntimeException::new);
     }
 
     private boolean isMayDayBankHoliday(LocalDate date) {
