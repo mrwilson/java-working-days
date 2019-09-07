@@ -6,7 +6,7 @@ import org.junit.Test;
 import uk.co.probablyfine.time.WorkingDays;
 import uk.co.probablyfine.time.WorkingDaysTest;
 
-public class WorkingDaysEnglandAndWalesTest implements WorkingDaysTest {
+public class EnglandAndWalesTest implements WorkingDaysTest {
 
     private final WorkingDays workingDays = WorkingDays.usingCalendar(ENGLAND_AND_WALES);
 
