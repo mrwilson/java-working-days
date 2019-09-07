@@ -31,4 +31,11 @@ public class WorkingDaysLogicTest implements WorkingDaysTest {
 
         assertThat(workingDays.daysBefore(date, -1), is(date.plusDays(1)));
     }
+
+    @Test
+    public void negativeDaysAfterBecomesDaysBefore() {
+        LocalDate date = date(2019, 4, 2);
+
+        assertThat(workingDays.daysAfter(date, -1), is(date.minusDays(1)));
+    }
 }
