@@ -2,6 +2,7 @@ package uk.co.probablyfine.time;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 import java.time.LocalDate;
 import org.junit.Test;
@@ -45,5 +46,15 @@ public class WorkingDaysLogicTest implements WorkingDaysTest {
         LocalDate end = date(2019, 4, 1);
 
         assertThat(workingDays.daysBetween(start, end), is(-1));
+    }
+
+    @Test
+    public void throwExceptionWhenInputDatesAreNull() {
+        try {
+            workingDays.daysBefore(null, 1);
+            fail("Expected an exception, didn't get one");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Input 'end' should not be null"));
+        }
     }
 }
