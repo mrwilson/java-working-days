@@ -41,6 +41,11 @@ public class WorkingDays {
     }
 
     public LocalDate daysBefore(LocalDate end, int daysBefore) {
+
+        if (daysBefore < 0) {
+            return daysAfter(end, -daysBefore);
+        }
+
         return end.datesUntil(ARBITRARY_START, REVERSE_ORDER)
                 .filter(not(HolidayCalendar::isTheWeekend))
                 .filter(not(calendar::isPublicHoliday))
