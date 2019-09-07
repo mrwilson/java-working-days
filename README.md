@@ -1,6 +1,7 @@
 # java-working-days
 
 [![Build Status](https://travis-ci.org/mrwilson/java-working-days.svg?branch=master)](https://travis-ci.org/mrwilson/java-working-days)
+[![Code style: google-1.7](https://img.shields.io/badge/code%20style-google%201.7-000000.svg)](https://github.com/google/google-java-format/)
 
 > What date is N working days after date X?
 
