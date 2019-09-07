@@ -38,4 +38,12 @@ public class WorkingDaysLogicTest implements WorkingDaysTest {
 
         assertThat(workingDays.daysAfter(date, -1), is(date.minusDays(1)));
     }
+
+    @Test
+    public void negativeDaysBetweenWhereEndIsBeforeStart() {
+        LocalDate start = date(2019, 4, 2);
+        LocalDate end = date(2019, 4, 1);
+
+        assertThat(workingDays.daysBetween(start, end), is(-1));
+    }
 }

@@ -38,6 +38,11 @@ public class WorkingDays {
     }
 
     public int daysBetween(LocalDate start, LocalDate end) {
+
+        if (end.isBefore(start)) {
+            return -daysBetween(end, start);
+        }
+
         return start.datesUntil(end)
                 .filter(not(HolidayCalendar::isTheWeekend))
                 .filter(not(calendar::isPublicHoliday))
