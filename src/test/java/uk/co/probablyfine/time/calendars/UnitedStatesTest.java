@@ -4,7 +4,7 @@ import org.junit.Test;
 import uk.co.probablyfine.time.WorkingDays;
 import uk.co.probablyfine.time.WorkingDaysTest;
 
-public class WorkingDaysUnitedStatesTest implements WorkingDaysTest {
+public class UnitedStatesTest implements WorkingDaysTest {
 
     @Override
     public WorkingDays objectUnderTest() {

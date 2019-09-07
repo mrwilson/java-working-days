@@ -12,7 +12,7 @@ import org.junit.runners.Parameterized.Parameters;
 import uk.co.probablyfine.time.WorkingDaysHistoricTest.Example;
 
 @RunWith(Parameterized.class)
-public class WorkingDaysEnglandWalesHistoricTest {
+public class EnglandAndWalesHistoricTest {
 
     @Parameters(name = "{0}")
     public static Collection<Example> data() throws IOException {
@@ -22,7 +22,7 @@ public class WorkingDaysEnglandWalesHistoricTest {
     private final HolidayCalendar calendar = HolidayCalendar.ENGLAND_AND_WALES;
     private final Example example;
 
-    public WorkingDaysEnglandWalesHistoricTest(Example example) {
+    public EnglandAndWalesHistoricTest(Example example) {
         this.example = example;
     }
 
