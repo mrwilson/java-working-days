@@ -94,4 +94,17 @@ public class WorkingDaysLogicTest implements WorkingDaysTest {
             assertThat(e.getMessage(), is("Inputs 'start' and 'end' should not be null"));
         }
     }
+
+    @Test
+    public void creationWithNullCalendar() {
+        try {
+            WorkingDays workingDays = WorkingDays.usingCalendar(null);
+
+            workingDays.daysBetween(date(2019, 4, 2), date(2019, 4, 2));
+
+            fail("Expected an exception, didn't get one");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Input 'calendar' should not be null"));
+        }
+    }
 }
