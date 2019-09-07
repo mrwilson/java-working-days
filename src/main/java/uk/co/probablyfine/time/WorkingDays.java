@@ -20,6 +20,10 @@ public class WorkingDays {
     }
 
     public static WorkingDays usingCalendar(HolidayCalendar calendar) {
+        if (calendar == null) {
+            throw new IllegalArgumentException("Input 'calendar' should not be null");
+        }
+
         return new WorkingDays(calendar);
     }
 
