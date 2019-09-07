@@ -1,10 +1,10 @@
 package uk.co.probablyfine.time;
 
-import static java.util.function.Predicate.not;
 import static java.util.stream.Collectors.toList;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.function.Predicate;
 import uk.co.probablyfine.time.calendars.HolidayCalendar;
 
 public class WorkingDays {
@@ -86,5 +86,9 @@ public class WorkingDays {
                 .limit(daysBefore + 1)
                 .collect(toList())
                 .get(daysBefore);
+    }
+
+    private static <T> Predicate<T> not(Predicate<T> target) {
+        return target.negate();
     }
 }
