@@ -9,6 +9,7 @@ public interface HolidayCalendar {
 
     HolidayCalendar ENGLAND_AND_WALES = new EnglandAndWales();
     HolidayCalendar UNITED_STATES = new UnitedStates();
+    HolidayCalendar FRANCE = new France();
 
     boolean isPublicHoliday(LocalDate date);
 
