@@ -1,17 +1,43 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+}
+
 plugins {
     id 'java'
+    id "maven-publish"
+    id "com.jfrog.bintray" version "1.8.4"
     id 'com.diffplug.gradle.spotless' version '3.24.2'
 }
 
 apply plugin: 'com.diffplug.gradle.spotless'
 
 group 'uk.co.probablyfine'
-version '0.0.1'
+version '0.2.0'
 
 sourceCompatibility = 1.9
 
+ext {
+    gitUrl = "https://github.com/mrwilson/java-working-days"
+}
+
 repositories {
+    mavenLocal()
     mavenCentral()
+    jcenter()
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
 }
 
 spotless {
@@ -20,6 +46,81 @@ spotless {
     }
 }
 
+tasks.withType(Javadoc).all { enabled = false }
+
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+def pomConfig = {
+    developers {
+        developer {
+            id "probablyfine"
+            name 'Alex Wilson'
+            email "alex+java@probablyfine.co.uk"
+        }
+    }
+
+    licenses {
+        license {
+            name 'MIT'
+            url gitUrl + '/blob/master/LICENSE'
+            distribution 'repo'
+        }
+    }
+
+    scm {
+        url gitUrl
+    }
+}
+
+publishing {
+    publications {
+        mavenPublication(MavenPublication) {
+            from components.java
+            artifact sourcesJar {
+                classifier "sources"
+            }
+            artifact javadocJar {
+                classifier "javadoc"
+            }
+            groupId project.group
+            artifactId project.name
+            version project.version
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', 'A small library to calculate working days between dates for multiple countries')
+                root.appendNode('name', project.name)
+                root.appendNode('url', gitUrl)
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
+
+bintray {
+    user = System.getProperty('bintray.user')
+    key = System.getProperty('bintray.key')
+    publications = ['mavenPublication']
+
+    pkg {
+        repo = project.group
+        name = project.name
+        licenses = ['MIT']
+        vcsUrl = gitUrl
+        version {
+            name = project.version
+            desc = project.version
+            released  = new Date()
+            gpg {
+                sign = true
+            }
+        }
+    }
+    publish = true
 }
