@@ -54,7 +54,7 @@ spotless {
 tasks.withType(Javadoc).all { enabled = false }
 
 dependencies {
-    testImplementation group: 'junit', name: 'junit', version: '4.13'
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
 }
 
 artifacts {
